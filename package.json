@@ -1,12 +1,12 @@
 {
   "name": "web_project_around_express",
   "version": "1.0.0",
-  "description": "Primeiro commit",
+  "description": "Criação de API com Node",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "dev": "nodemon app.js"
   },
   "author": "Vitor Ferreira Guimarães",
   "license": "ISC",

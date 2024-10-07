@@ -1,0 +1,19 @@
+{
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": 2020,  // Para garantir que o ESLint entenda ES6/ES2020
+    "sourceType": "module" // Define que estamos utilizando "import/export"
+  },
+  "env": {
+    "es6": true,   // Ativa as features do ES6
+    "node": true   // Define o ambiente Node.js
+  },
+  "rules": {
+    "no-console": "off",  // Desativa o erro para "console.log" (opcional)
+    "eol-last": ["error", "always"], // Garante que tenha uma nova linha ao final dos arquivos
+    "import/extensions": ["error", "ignorePackages", {
+      "js": "never",
+      "json": "never"
+    }]
+  }
+}
