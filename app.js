@@ -11,7 +11,9 @@ app.use('/users', usersRouter);
 app.use('/cards', cardRouter);
 
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  res.send({
+    "message": "A solicitação não foi encontrada"
+  });
 });
 
 app.listen(port, () => {
