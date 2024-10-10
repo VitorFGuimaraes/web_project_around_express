@@ -19,7 +19,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.listen(port);
+
 app.use(express.json());
 app.use(usersRoute);
 app.use(cardsRoute);
+app.use(express.urlencoded({ extended: true }));
+
+app.listen(port);
