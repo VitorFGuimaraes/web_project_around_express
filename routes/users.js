@@ -1,46 +1,15 @@
-const express = require('express');
+const router = require('express').Router();
 
-const router = express.Router();
+const userController = require('../controllers/users');
 
-const fs = require('fs');
-const path = require('path');
+router.post('/users', userController.createUser);
 
-router.get('/', (req, res) => {
-  fs.readFile(path.join(__dirname, '..', 'data', 'users.json'), 'utf-8', (err, data) => {
-    if (err) {
-      return res.status(500).json({ message: 'Erro ao ler o arquivo' });
-    }
+router.get('/users', userController.getUsers);
 
-    try {
-      const users = JSON.parse(data);
-      return res.json(users);
-    } catch (parseError) {
-      return res.status(500).json({ message: 'Erro ao parsear o JSON' });
-    }
-  });
-});
+router.get('/users/:userId', userController.getUsersById);
 
-router.get('/:id', (req, res) => {
-  const userId = req.params.id;
+router.patch('/users/me', userController.updateUser);
 
-  fs.readFile(path.join(__dirname, '..', 'data', 'users.json'), 'utf-8', (err, data) => {
-    if (err) {
-      return res.status(500).json({ message: 'Erro ao ler o arquivo' });
-    }
-
-    try {
-      const users = JSON.parse(data);
-      const selectedUser = users.find((user) => user._id === userId);
-
-      if (selectedUser) {
-        return res.json(selectedUser);
-      }
-
-      return res.status(404).json({ message: 'Usuário não encontrado' });
-    } catch (parseError) {
-      return res.status(500).json({ message: 'Erro ao parsear o JSON' });
-    }
-  });
-});
+router.patch('/users/me/avatar', userController.updateAvatar);
 
 module.exports = router;

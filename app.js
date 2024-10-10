@@ -1,21 +1,25 @@
 const express = require('express');
-const usersRouter = require('./routes/users');
-const cardRouter = require('./routes/cards');
+
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/aroundb');
 
 const app = express();
 const port = 3000;
 
+const usersRoute = require('./routes/users');
+
+const cardsRoute = require('./routes/cards');
+
+app.use((req, res, next) => {
+  req.user = {
+    _id: '5d8b8592978f8bd833ca8133',
+  };
+
+  next();
+});
+
+app.listen(port);
 app.use(express.json());
-
-app.use('/users', usersRouter);
-app.use('/cards', cardRouter);
-
-app.get('/', (req, res) => {
-  res.send({
-    "message": "A solicitação não foi encontrada"
-  });
-});
-
-app.listen(port, () => {
-  console.log(`Servidor Online na porta ${port}`);
-});
+app.use(usersRoute);
+app.use(cardsRoute);
