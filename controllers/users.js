@@ -46,26 +46,25 @@ module.exports.createUser = (req, res) => {
 
 module.exports.updateUser = (req, res) => {
   const { name, about } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name, about }).then((users) =>
-    res.send({ data: users }).catch((err) => {
-      if (err.name === 'ValidationError') {
-        res.status(ERROR_INVALID_DATA).send({ message: 'Dados inválidos' });
-      } else {
-        res.status(ERROR_FETCH).send({ message: 'Error' });
-      }
-    })
-  );
+  User.findByIdAndUpdate(req.user._id, { name, about }).then((users) => res.send({
+    data: users,
+  }).catch((err) => {
+    if (err.name === 'ValidationError') {
+      res.status(ERROR_INVALID_DATA).send({ message: 'Dados inválidos' });
+    } else {
+      res.status(ERROR_FETCH).send({ message: 'Error' });
+    }
+  }));
 };
 
 module.exports.updateAvatar = (req, res) => {
   const { avatar } = req.body;
-  User.findByIdAndUpdate(req.user._id, { avatar }).then((users) =>
-    res.send({ data: users }).catch((err) => {
+  User.findByIdAndUpdate(req.user._id, { avatar })
+    .then((users) => res.send({ data: users }).catch((err) => {
       if (err.name === 'ValidationError') {
         res.status(ERROR_INVALID_DATA).send({ message: 'Dados inválidos' });
       } else {
         res.status(ERROR_FETCH).send({ message: 'Error' });
       }
-    })
-  );
+    }));
 };
